@@ -1,3 +1,4 @@
+print("factorial_app.py is now running")
 import time
 
 def run_with_time(func, *args, **kwargs):
@@ -22,33 +23,50 @@ def factorial_rec(n):
         
 
 if __name__ == "__main__":
-    print("""
-        1. 반복문 기반 팩토리얼
-        2. 재귀함수 기반 팩토리얼    """)
     while(True):
-        choice = int(input("\t*팩토리얼 실행 방식을 선택하세요 (1 / 2) :"))
-        if choice not in [1, 2]:
-            print("1 또는 2 를 입력하세요")
-            continue
-        break
-        
-
-
-    while(True):
-        try:
-            num = int(input("\t숫자를 입력하세요 :"))
-            if num < 0:
-                raise ValueError("0보다 큰 정수를 입력하세요")
+        print("""
+            1. 반복문 기반 팩토리얼
+            2. 재귀함수 기반 팩토리얼    
+            3. 반복문, 재귀함수 둘다 사용
+            4. 프로그램 종료
+            """)
+        while(True):
+            choice = int(input("\t*팩토리얼 실행 방식을 선택하세요 (1 / 2 / 3/ 4) :"))
+            if choice not in [1, 2, 3, 4]:
+                print("항목에 해당하는 번호를 입력하세요")
+                continue
             break
-        except ValueError:
-            print("0 보다 큰 정수를 입력하세요")
-            continue
             
-    if choice == 1:
-        result, t = run_with_time(factorial_iter, num)
-        print(f"{num}! = {result}")
-        print(f"소요시간: {t}")
-    else:
-        result, t = run_with_time(factorial_rec, num)
-        print(f"{num}! = {result}")
-        print(f"소요시간: {t}")
+
+
+        while(True):
+            if choice == 4: 
+                print("프로그램을 종료합니다.")
+                exit()
+            try:
+                num = int(input("\t숫자를 입력하세요 :"))
+                if num < 0:
+                    raise ValueError("0보다 큰 정수를 입력하세요")
+                break
+            except ValueError:
+                print("0 보다 큰 정수를 입력하세요")
+                continue
+                
+        if choice == 1:
+            result, t = run_with_time(factorial_iter, num)
+            print(f"반복문 팩토리얼 : {num}! = {result}")
+            print(f"소요시간: {t:.6f}")
+        elif choice == 2:
+            result, t = run_with_time(factorial_rec, num)
+            print(f"재귀함수 팩토리얼 : {num}! = {result}")
+            print(f"소요시간: {t:.6f}")
+        elif choice == 3:
+            
+            result, t = run_with_time(factorial_iter, num)
+            print(f"반복문 팩토리얼 : {num}! = {result}")
+            print(f"소요시간: {t:.6f}")
+
+            result, t = run_with_time(factorial_rec, num)
+            print(f"재귀함수 팩토리얼 : {num}! = {result}")
+            print(f"소요시간: {t:.6f}")
+        print("---------------------------------------")
